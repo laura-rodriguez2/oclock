@@ -1,31 +1,43 @@
-$(document).ready(function() {
-// Création d'une variable pour afficher les mois, et une pour les jours (en français)
-var monthNames = [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre" ]; 
-var dayNames= ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]
+let [milliseconds,seconds,minutes,hours] = [0,0,0,0];
+let timerRef = document.querySelector('.timerDisplay');
+let int = null;
 
-// Création d'un nouvel objet Date 
-var newDate = new Date();
-// On extrait la date actuelle
-newDate.setDate(newDate.getDate());
-// On affiche la date dans l'html (avant l'horloge)
-$('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+document.getElementById('startTimer').addEventListener('click', ()=>{
+    if(int!==null){
+        clearInterval(int);
+    }
+    int = setInterval(displayTimer,10);
+});
 
-setInterval( function() {
-	// On recréer un nouvel objet Date ou on extrait les secondes
-	var seconds = new Date().getSeconds();
-	$("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
-	},1000);
-	
-setInterval( function() {
-	// Pareil qu'au dessus mais pour les minutes
-	var minutes = new Date().getMinutes();
-	$("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
-    },1000);
-	
-setInterval( function() {
-	// Pareil qu'au dessus mais pour les heures
-	var hours = new Date().getHours();
-	$("#hours").html(( hours < 10 ? "0" : "" ) + hours);
-    }, 1000);
-	
-}); 
+document.getElementById('pauseTimer').addEventListener('click', ()=>{
+    clearInterval(int);
+});
+
+document.getElementById('resetTimer').addEventListener('click', ()=>{
+    clearInterval(int);
+    [milliseconds,seconds,minutes,hours] = [0,0,0,0];
+    timerRef.innerHTML = '00 : 00 : 00 : 000 ';
+});
+
+function displayTimer(){
+    milliseconds+=10;
+    if(milliseconds == 1000){
+        milliseconds = 0;
+        seconds++;
+        if(seconds == 60){
+            seconds = 0;
+            minutes++;
+            if(minutes == 60){
+                minutes = 0;
+                hours++;
+            }
+        }
+    }
+    let h = hours < 10 ? "0" + hours : hours;
+    let m = minutes < 10 ? "0" + minutes : minutes;
+    let s = seconds < 10 ? "0" + seconds : seconds;
+    let ms = milliseconds < 10 ? "00" + milliseconds : milliseconds < 100 ? "0" + milliseconds : milliseconds;
+
+    timerRef.innerHTML = ` ${h} : ${m} : ${s} : ${ms}`;
+}
+

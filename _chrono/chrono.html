@@ -2,61 +2,32 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horloge</title>
+    <title>Chronomètre</title>
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto+Mono:wght@700&display=swap"
+        rel="stylesheet">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="chrono.css" />
 
-    <meta name="" content="horloge" />
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="horloge.css" />
-    <style type="text/css">
+    <style media="screen">
     </style>
-    <!-- jQuery et lien horloge.js -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="horloge.js">
-    </script>
 </head>
 
 <body>
-
-    <header class="ScriptHeader">
-        <div class="rt-container">
-            <div class="col-rt-12">
-                <div class="rt-heading">
-                    <h1>Horloge</h1>
-                </div>
-            </div>
+    <div class="container">
+        <div class="timerDisplay">
+            00 : 00 : 00 : 000
         </div>
-    </header>
-
-    <section>
-        <div class="rt-container">
-            <div class="col-rt-12">
-                <div class="Scriptcontent">
-
-                    <!-- HTML de l'horloge -->
-                    <div class="container">
-                        <div class="clock">
-                            <div id="Date">Jeudi 12 Mai 2022</div>
-
-                            <ul>
-                                <li id="hours">00</li>
-                                <li id="point">:</li>
-                                <li id="min">00</li>
-                                <li id="point">:</li>
-                                <li id="sec">00</li>
-                            </ul>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        <div class="buttons">
+            <button id="pauseTimer">Pause</button>
+            <button id="startTimer">Start</button>
+            <button id="resetTimer">Reset</button>
         </div>
-    </section>
+    </div>
 
+    <script src="chrono.js">
+    </script>
 </body>
 
 </html>
