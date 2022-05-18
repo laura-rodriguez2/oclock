@@ -1,27 +1,43 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="./minuteur.css">
-    <title>Countdown</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reveil.css">
+    <title>Clock</title>
+</head>
+<body>
+    <section class="container">
+        <div class="time-display">
+            <img class="timer" src="clock.png">
+            <div id="clock"></div>
+        </div>
+        <form class="setAlarm">
+        <label class="alarm-heading"><h3>Set Alarm(24-Hour Clock)</h3><label><br>
+        <div class="set-alarm-field">
+            <input type="number" name="a_hour" id="a_hour" placeholder="HH" max="23" min="00">
+            <input type="number" name="a_min" id="a_min" placeholder="MM" max="59" min="00">
+            <input type="number" name="a_sec" id="a_sec" placeholder="SS" max="59" min="00">
+        </div>
+            <div class="controls">
+                <button type="submit" class="set-alarm">Set Alarm</button>
+                <button type="reset" onclick="clearAlarm()" class="clear-alarm">Stop Alarm</button>
+            </div>
+        </form> 
+    </section>
+    <hr style="margin-top: 20px">
 
-
-    <h1><span>Countdown Timer</span></h1>
-    </div>
-    <main>
-        <form>
-            Minutes: <input type="text" id="mns" name="mns" value="0" size="3" maxlength="3" /> &nbsp; &nbsp; Seconds:
-            <input type="text" id="scs" name="scs" value="0" size="2" maxlength="2" /><br />
-            <input type="button" id="btnct" value="START" onclick="countdownTimer()" />
-            <input type="button" id="btnct" value="STOP" onclick="countdownStop()" />
-
-        </form>
-        Countdown Timer: &nbsp; <span id="showmns">00</span>:<span id="showscs">00</span>
-
-        <script type="text/javascript" src="minuteur.js">
-
-        </script>
-    </main>
-    </body>
-
+    <section>
+        <div>
+            <h3 class="alarm-heading" style="margin-top: -20px;">Upcoming Alarms</h3>
+        </div>
+        <div>
+            <ul id = "myList">
+                
+            </ul>
+        </div>
+    </section>
+    <script src="reveil.js"></script>
+</body>
 </html>

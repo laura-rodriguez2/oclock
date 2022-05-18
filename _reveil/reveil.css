@@ -1,68 +1,114 @@
-*,
-*:before,
-*:after {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+
+body{
+  background-color: #212121;
+  margin-top: 5%;
+  margin-left: 40%; 
+  font-family: 'Times New Roman', Times, serif;
+   margin-right: 40%;
+  /* align-items: center; */
 }
 
-body {
-  background: #448aff;
+.container{
+  align-content: center;
+  text-align: center;
 }
 
-.container {
-  background-color: #ffffff;
-  width: 40%;
-  min-width: 500px;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  padding: 20px 0;
-  padding-bottom: 50px;
-  border-radius: 10px;
-}
-
-.timerDisplay {
-  position: relative;
-  width: 92%;
-  background: #ffffff;
-  left: 4%;
-  padding: 40px 0;
-  font-family: 'Roboto mono', monospace;
-  color: #0381bb;
-  font-size: 40px;
+.time-display{
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  border-radius: 5px;
-  box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
+  flex-direction: row;
+  align-content: center;
+  background-color: white;
+  width: 230px;
+  height: 10%;
+  border-radius: 4px;
+  padding-left: 5px;
+  padding-right: 5px; 
+  margin-left: 35px;
+
 }
 
-.buttons {
-  width: 90%;
-  margin: 60px auto 0 auto;
+
+.timer{
+  width: 40px;
+  height: 40px;
+  margin-top: 7px;
+  margin-right: 10px;
+}
+
+#clock{
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+
+}
+
+.alarm-heading{
+  color: whitesmoke;
+  margin-bottom: 20px;
+  padding-top: 50px;
+}
+
+.set-alarm-field{
+  margin-top: -20px;
+  height: 40px;
+  /* background-color: yellowgreen; */
+  padding-top: 0px;
+}
+
+.controls button{
+  background-color: #466a99;
+  border-color: #466a99;
+  color: whitesmoke;
+  width: 105px;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight:500;
+}
+
+.controls button:hover{
+  background-color: #204b74;
+}
+
+#myList{
+  list-style-type: none;
+  
+}
+
+#myList li{
+  font-size: 1.2rem;
+  color: whitesmoke;
+  background-color: #204b74;
+  height: 2rem;
+  margin-left: -30px;
+  border-radius: 4px;
+  padding-left: 16px;
+  padding-top: 10px;
+  width: 280px;
+  margin-bottom: 10px;
+
+}
+
+.time-list{
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
 }
 
-.buttons button {
-  width: 120px;
-  height: 45px;
-  background-color: #205e94;
-  color: #ffffff;
-  border: none;
-  font-family: 'Poppins', sans-serif;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-  outline: none;
+
+.time-list span{
+  /* background-color: violet; */
+  width: 160px;
+  margin-right: 18px;
+  
 }
 
-.buttons button:nth-last-child(2) {
-  background-color: #d23332;
+.time-list button{
+  background-color: #5d759d;
+  border-color: #5d759d;
+  border-radius: 3px;
+  border-width: 0px;
+  height: 22px;
+  color: whitesmoke;
 }
 
-.buttons button:nth-last-child(1) {
-  background-color: #20b380;
-}
+

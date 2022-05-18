@@ -1,60 +1,134 @@
-// sets variables for minutes and seconds
-var ctmnts = 0;
-var ctsecs = 0;
-var startchr = 0;       // used to control when to read data from form
+const display = document.getElementById('clock');
 
-function countdownTimer() {
-    // https://coursesweb.net/javascript/
-    // if $startchr is 0, and form fields exists, gets data for minutes and seconds, and sets $startchr to 1
-    if (startchr == 0 && document.getElementById('mns') && document.getElementById('scs')) {
-        // makes sure the script uses integer numbers
-        ctmnts = parseInt(document.getElementById('mns').value) + 0;
-        ctsecs = parseInt(document.getElementById('scs').value) * 1;
 
-        // if data not a number, sets the value to 0
-        if (isNaN(ctmnts)) ctmnts = 0;
-        if (isNaN(ctsecs)) ctsecs = 0;
+// set audio for alarm
+const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3');
+audio.loop = true;
 
-        // rewrite data in form fields to be sure that the fields for minutes and seconds contain integer number
-        document.getElementById('mns').value = ctmnts;
-        document.getElementById('scs').value = ctsecs;
-        startchr = 1;
-        document.getElementById('btnct').setAttribute('disabled', 'disabled');     // disable the button
+
+let alarmTime = null;
+let alarmTimeout = null;
+
+
+const myList = document.querySelector('#myList');
+const addAlarm = document.querySelector('.setAlarm')
+
+
+const alarmList = [];  // Stores all the alarms being set 
+// let count =1;
+
+
+// Plays the alarm audio at correct time
+function ringing(now){
+    audio.play();
+    alert(`Hey! it is ${now}`)
+}
+
+
+// updates time every second 
+function updateTime() {
+    var today = new Date();
+    const hour = formatTime(today.getHours());
+    const minutes = formatTime(today.getMinutes());
+    const seconds = formatTime(today.getSeconds());
+    const now = `${hour}:${minutes}:${seconds}`;
+
+    display.innerText=`${hour}:${minutes}:${seconds}`;
+    
+//     check if the alarmList includes the current time , "now"
+//     if yes, ringing() is called
+    if(alarmList.includes(now) ){
+        ringing(now);
+    } 
+}
+
+
+// set the correct format of time
+// converts "1:2:3" to "01:02:03"
+function formatTime(time) {
+    if ( time < 10 && time.length != 2) {
+        return '0' + time;
     }
+    return time;
+}
 
-    // if minutes and seconds are 0, sets $startchr to 0, and return false
-    if (ctmnts == 0 && ctsecs == 0) {
-        startchr = 0;
-        document.getElementById('btnct').removeAttribute('disabled');     // remove "disabled" to enable the button
 
-        /* HERE YOU CAN ADD TO EXECUTE A JavaScript FUNCTION WHEN COUNTDOWN TIMER REACH TO 0 */
-
-        return false;
+// function to clear/stop the currently playing alarm
+function clearAlarm() {
+    audio.pause();
+    if (alarmTimeout) {
+        clearTimeout(alarmTimeout);
+        alert('Alarm cleared');
     }
-    else {
-        // decrease seconds, and decrease minutes if seconds reach to 0
-        ctsecs--;
-        if (ctsecs < 0) {
-            if (ctmnts > 0) {
-                ctsecs = 59;
-                ctmnts--;
-            }
-            else {
-                ctsecs = 0;
-                ctmnts = 0;
-            }
+}      
+
+
+// removes an alarm from the unordered list and the webpage when "Delete Alarm" is clicked
+myList.addEventListener('click', e=> {
+    console.log("removing element")
+    if(e.target.classList.contains("deleteAlarm")){
+        e.target.parentElement.remove();
+    }    
+})
+
+
+// removes an alarm from the array when "Delete Alarm" is clicked
+remove = (value) => {
+    let newList = alarmList.filter((time) => time != value);
+    alarmList.length = 0;                  // Clear contents
+    alarmList.push.apply(alarmList, newList);
+    
+    console.log("newList", newList);
+    console.log("alarmList", alarmList);
+}
+
+
+// Adds newAlarm to the unordered list as a new list item on webpage
+function showNewAlarm(newAlarm){
+    const html =`
+    <li class = "time-list">        
+        <span class="time">${newAlarm}</span>
+        <button class="deleteAlarm time-control" id="delete-button" onclick = "remove(this.value)" value=${newAlarm}>Delete Alarm</button>       
+    </li>`
+    myList.innerHTML += html
+};
+
+
+// event to set a new alarm whenever the form is submitted 
+addAlarm.addEventListener('submit', e=> {
+    e.preventDefault();
+    // const newAlarm = addAlarm.alarmTime.value;
+    let new_h=formatTime(addAlarm.a_hour.value);
+    if(new_h === '0'){
+        new_h = '00'
+    }
+    let new_m=formatTime(addAlarm.a_min.value);
+    if(new_m === '0'){
+        new_m = '00'
+    }
+    let new_s=formatTime(addAlarm.a_sec.value);
+    if(new_s === '0'){
+        new_s = '00'
+    }
+    
+    const newAlarm = `${new_h}:${new_m}:${new_s}`
+
+//     add newAlarm to alarmList
+    if(isNaN(newAlarm)){
+        if(!alarmList.includes(newAlarm)){
+            alarmList.push(newAlarm);
+            console.log(alarmList);
+            console.log(alarmList.length);
+            showNewAlarm(newAlarm);
+            addAlarm.reset();
+        } else{
+            alert(`Alarm for ${newAlarm} already set.`);
         }
-    }
+    } else{
+        alert("Invalid Time Entered")
+    }        
+})
 
-    // display the time in page, and auto-calls this function after 1 seccond
-    document.getElementById('showmns').innerHTML = ctmnts;
-    document.getElementById('showscs').innerHTML = ctsecs;
-    setTimeout('countdownTimer()', 1000);
-}
 
-const reloadtButton = document.querySelector("#reload");
-function countdownStop() {
-    reload = location.reload();
-}
-reloadButton.addEventListener("click", reload, false);
-   //-->
+// calls updateTime() every second
+setInterval(updateTime, 1000);
