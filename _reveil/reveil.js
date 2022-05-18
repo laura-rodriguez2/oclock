@@ -1,10 +1,8 @@
 const display = document.getElementById('clock');
 
-
-// set audio for alarm
-const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3');
-audio.loop = true;
-
+// set audio for alarm	
+const audio = new Audio('<https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3>');	
+audio.loop = true
 
 let alarmTime = null;
 let alarmTimeout = null;
@@ -14,18 +12,17 @@ const myList = document.querySelector('#myList');
 const addAlarm = document.querySelector('.setAlarm')
 
 
-const alarmList = [];  // Stores all the alarms being set 
-// let count =1;
+const alarmList = [];  // Liste de toutes les alarmes 
 
 
-// Plays the alarm audio at correct time
+// Quand l'alarme sonne 
 function ringing(now){
     audio.play();
-    alert(`Hey! it is ${now}`)
+    alert(`Il est ${now} !`)
 }
 
 
-// updates time every second 
+// Update le temps à chaque secondes
 function updateTime() {
     var today = new Date();
     const hour = formatTime(today.getHours());
@@ -43,8 +40,7 @@ function updateTime() {
 }
 
 
-// set the correct format of time
-// converts "1:2:3" to "01:02:03"
+// Affiche le bon format de temps (rajoute un zéro quand il n'y qu'une seul chiffre)
 function formatTime(time) {
     if ( time < 10 && time.length != 2) {
         return '0' + time;
@@ -53,7 +49,7 @@ function formatTime(time) {
 }
 
 
-// function to clear/stop the currently playing alarm
+// Fonction pour supprimer une alarme
 function clearAlarm() {
     audio.pause();
     if (alarmTimeout) {
@@ -62,8 +58,7 @@ function clearAlarm() {
     }
 }      
 
-
-// removes an alarm from the unordered list and the webpage when "Delete Alarm" is clicked
+// Supprimer l'alarme de la liste aussi
 myList.addEventListener('click', e=> {
     console.log("removing element")
     if(e.target.classList.contains("deleteAlarm")){
@@ -72,10 +67,10 @@ myList.addEventListener('click', e=> {
 })
 
 
-// removes an alarm from the array when "Delete Alarm" is clicked
+// Supprime l'alarme de l'array 
 remove = (value) => {
     let newList = alarmList.filter((time) => time != value);
-    alarmList.length = 0;                  // Clear contents
+    alarmList.length = 0;                 
     alarmList.push.apply(alarmList, newList);
     
     console.log("newList", newList);
@@ -83,18 +78,18 @@ remove = (value) => {
 }
 
 
-// Adds newAlarm to the unordered list as a new list item on webpage
+// Ajoute une nouvelle alarme dans une liste 
 function showNewAlarm(newAlarm){
     const html =`
     <li class = "time-list">        
         <span class="time">${newAlarm}</span>
-        <button class="deleteAlarm time-control" id="delete-button" onclick = "remove(this.value)" value=${newAlarm}>Delete Alarm</button>       
+        <button class="deleteAlarm time-control" id="delete-button" onclick = "remove(this.value)" value=${newAlarm}>Supprimer</button>       
     </li>`
     myList.innerHTML += html
 };
 
 
-// event to set a new alarm whenever the form is submitted 
+// Ajouter une nouvelle alarme dès que le form est rempli
 addAlarm.addEventListener('submit', e=> {
     e.preventDefault();
     // const newAlarm = addAlarm.alarmTime.value;
@@ -113,7 +108,7 @@ addAlarm.addEventListener('submit', e=> {
     
     const newAlarm = `${new_h}:${new_m}:${new_s}`
 
-//     add newAlarm to alarmList
+//     Ajoute la nouvelle alarme dans la 
     if(isNaN(newAlarm)){
         if(!alarmList.includes(newAlarm)){
             alarmList.push(newAlarm);
@@ -122,13 +117,13 @@ addAlarm.addEventListener('submit', e=> {
             showNewAlarm(newAlarm);
             addAlarm.reset();
         } else{
-            alert(`Alarm for ${newAlarm} already set.`);
+            alert(`L'alarme ${newAlarm} à déjà été rentrer.`);
         }
     } else{
-        alert("Invalid Time Entered")
+        alert("Temps invalide")
     }        
 })
 
 
-// calls updateTime() every second
+// Update le temps
 setInterval(updateTime, 1000);
