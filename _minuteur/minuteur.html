@@ -3,20 +3,32 @@
 
 <head>
     <link rel="stylesheet" href="./minuteur.css">
-    <title>Countdown</title>
+    <title>Minuteur</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 
-    <h1><span>Countdown Timer</span></h1>
-    </div>
+
     <main>
+        <a href="../index.html"><button type="button" class="btn btn-warning">Accueil</button></a>
+
+        <h1>Minuteur</h1>
+
         <form>
-            Minutes: <input type="text" id="mns" name="mns" value="0" size="3" maxlength="3" /> &nbsp; &nbsp; Seconds:
+            <section class="section1">
+
+            <p>Minutes: </p>
+            <input type="text" id="mns" name="mns" value="0" size="3" maxlength="3" />
+            <p>Secondes:</p>
             <input type="text" id="scs" name="scs" value="0" size="2" maxlength="2" /><br />
-            <input type="button" id="btnct" value="START" onclick="countdownTimer()" />
-            <input type="button" id="btnct" value="STOP" onclick="countdownStop()" />
+            </section>
+
+            <section class="section2">
+            <input type="button" class="btn btn-dark" id="btnct" value="START" onclick="countdownTimer()" />
+            <input type="button" class="btn btn-dark" id="btnct" value="STOP" onclick="countdownStop()" />
+            </section>
 
         </form>
-        Countdown Timer: &nbsp; <span id="showmns">00</span>:<span id="showscs">00</span>
+        Minuteur : &nbsp; <span id="showmns">00</span>:<span id="showscs">00</span>
 
         <script type="text/javascript" src="minuteur.js">
 

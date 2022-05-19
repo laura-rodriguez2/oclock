@@ -6,10 +6,10 @@
     box-sizing: border-box;
 }
 body{
-  background: #448aff;
+  background-color: rgb(41, 41, 41);
 }
 .container{
-    background-color: #ffffff;
+  background-color: rgb(55, 55, 55);
     width: 40%;
     min-width: 500px;
     position: absolute;
@@ -23,17 +23,15 @@ body{
 .timerDisplay{
     position: relative;
     width: 92%;
-    background: #ffffff;
     left: 4%;
     padding: 40px 0;
-    font-family: 'Roboto mono',monospace;
-    color: #0381bb;
+    /* font-family: 'Roboto mono',monospace; */
+    color: #d5d5d5;
     font-size: 40px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     border-radius: 5px;
-    box-shadow: 0 0 20px rgba(0,139,253,0.25);
 }
 .buttons{
     width: 90%;
@@ -42,20 +40,9 @@ body{
     justify-content: space-around;
 }
 .buttons button{
-    width: 120px;
-    height: 45px;
-    background-color: #205e94;
+    /* background-color: rgb(41, 41, 41); */
     color: #ffffff;
     border: none;
     font-family: 'Poppins',sans-serif;
     font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    outline: none;
-}
-.buttons button:nth-last-child(2){
-  background-color: #d23332;
-}
-.buttons button:nth-last-child(1){
-  background-color: #20b380;
 }

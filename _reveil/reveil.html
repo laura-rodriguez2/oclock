@@ -5,32 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="reveil.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     <title>Réveil</title>
 </head>
 <body>
+    <main>
+        <a href="../index.html"><button type="button" class="btn btn-warning">Accueil</button></a>
+
     <section class="container">
         <div class="time-display">
-            <img class="timer" src="clock.png">
+            <!-- <img class="timer" src="clock.png"> -->
             <div id="clock"></div>
         </div>
         <form class="setAlarm">
-        <label class="alarm-heading"><h3>Réveil</h3><label><br>
+        <label class="alarm-heading"><h1>Réveil</h1><label><br>
         <div class="set-alarm-field">
             <input type="number" name="a_hour" id="a_hour" placeholder="HH" max="23" min="00">
             <input type="number" name="a_min" id="a_min" placeholder="MM" max="59" min="00">
             <input type="number" name="a_sec" id="a_sec" placeholder="SS" max="59" min="00">
         </div>
             <div class="controls">
-                <button type="submit" class="set-alarm">Ajouter</button>
-                <button type="reset" onclick="clearAlarm()" class="clear-alarm">Supprimer</button>
+                <button type="submit" class="btn btn-warning">Ajouter</button>
+                <button type="reset" onclick="clearAlarm()" class="btn btn-warning">Supprimer</button>
             </div>
         </form> 
     </section>
-    <hr style="margin-top: 20px">
+    <!-- <hr style="margin-top: 20px"> -->
 
     <section>
         <div>
-            <h3 class="alarm-heading" style="margin-top: -20px;">Alarmes à venir</h3>
+            <h3 class="alarm-heading" >Alarmes à venir :</h3>
         </div>
         <div>
             <ul id = "myList">
@@ -39,6 +44,6 @@
         </div>
     </section>
     
-    <script src="reveil.js"></script>
+    <script src="reveil.js"></script></main>
 </body>
 </html>

@@ -81,10 +81,10 @@ remove = (value) => {
 // Ajoute une nouvelle alarme dans une liste 
 function showNewAlarm(newAlarm){
     const html =`
-    <li class = "time-list">        
+    <p class = "time-list">        
         <span class="time">${newAlarm}</span>
-        <button class="deleteAlarm time-control" id="delete-button" onclick = "remove(this.value)" value=${newAlarm}>Supprimer</button>       
-    </li>`
+        <button class="btn btn-warning" id="delete-button" onclick = "remove(this.value)" value=${newAlarm}>Supprimer</button>       
+    </p>`
     myList.innerHTML += html
 };
 
